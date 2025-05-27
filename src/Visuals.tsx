@@ -1,8 +1,9 @@
 import "./Vis.css"
+import prop from "../public/prop.mp4"
 
 export default function Visuals(){
 
 	return(
-		<h1>j</h1>
+	<h1></h1>
 	);
 }

@@ -1,6 +1,8 @@
-import { Button, Stack, TextInput, PasswordInput, Group } from '@mantine/core';
+import { Button, Stack, TextInput, PasswordInput, Group, Paper } from '@mantine/core';
 import { useState } from 'react'
 import "./App.css"
+import  prop from '../public/prop.mp4'
+
 
 export default function App() {
 
@@ -16,7 +18,14 @@ export default function App() {
   return (
 
     <div className='inpt'>
+       <video src={prop} autoPlay loop muted />
+      <div className='content'>
+       <Paper shadow="sm" p="xl" style={{
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        backdropFilter: 'blur(7px)',                
+      }}>
       <Stack
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
       w={500}
       bg="var(--mantine-color-body)"
       align="strech"
@@ -38,6 +47,10 @@ export default function App() {
       <div style={{flexGrow: "1"}}>&nbsp;</div>
         <Button mt="lg" color='violet' variant='filled'onClick={()=>{setSend(!send)}}>potvrdit</Button>
         </Group>
+         </Paper>
+
+      </div>
+     
     </div>
   );
 }
