@@ -51,14 +51,10 @@ export default function App() {
             onChange={(event) => setJmeno(event.currentTarget.value)}/>
 
             <PasswordInput
-            className="bg-['rgba(255, 255, 255, 0.09)'] backdrop-blur-2xl rounded-xs px-12 py-4 "
-             /* style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.09)',
-                backdropFilter: 'blur(50px)',
-                border: '1px',
+            className="bg-['rgba(255, 255, 255, 0.09)'] backdrop-blur-2xl border rounded-sm"
+             style={{
                 padding: '4px 12px',
-                borderRadius: '4px',
-              }}*/
+              }}
 
               placeholder='heslo'
               value={heslo}
