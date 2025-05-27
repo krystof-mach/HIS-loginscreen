@@ -10,9 +10,7 @@ import '@mantine/core/styles.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <MantineProvider>
-      <Visuals />
       <App />
-      
     </MantineProvider>
   </React.StrictMode>
 );

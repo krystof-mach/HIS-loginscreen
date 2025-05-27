@@ -1,7 +1,7 @@
 import { Button, Stack, TextInput, PasswordInput, Group, Paper } from '@mantine/core';
 import { useState } from 'react'
 import "./App.css"
-import  prop from '../public/prop.mp4'
+import prop from './prop.mp4'
 
 
 export default function App() {
@@ -10,47 +10,69 @@ export default function App() {
   const [jmeno, setJmeno] = useState('');
   const [send, setSend] = useState(false);
 
-  if(send){
-    console.log("jmeno: ",jmeno, "heslo:",heslo);
+  if (send) {
+    console.log("jmeno: ", jmeno, "heslo:", heslo);
     setSend(!send);
   }
 
   return (
 
     <div className='inpt'>
-       <video src={prop} autoPlay loop muted />
+      
+      <div className="overlay"></div>
+      <video src={prop} autoPlay loop muted />
       <div className='content'>
-       <Paper shadow="sm" p="xl" style={{
-        backgroundColor: 'rgba(255, 255, 255, 0.3)',
-        backdropFilter: 'blur(7px)',                
-      }}>
-      <Stack
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}
-      w={500}
-      bg="var(--mantine-color-body)"
-      align="strech"
-      justify="center"
-      gap="md"
-    >
-    
-      <TextInput 
-      placeholder='uzivatel'
-      value={jmeno}
-      onChange={(event) => setJmeno(event.currentTarget.value)}/>
+        <Paper shadow="xl" p="xl"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.3)',
+          backdropFilter: 'blur(3px)',
+        }}>
+          <Stack
+            w={500}
+            align="strech"
+            justify="center"
+            gap="lg"
+          >
 
-      <PasswordInput
-        placeholder='heslo'
-        value={heslo}
-        onChange={(event) => setHeslo(event.currentTarget.value)}/>
-    </Stack>
-    <Group align='right'>
-      <div style={{flexGrow: "1"}}>&nbsp;</div>
-        <Button mt="lg" color='violet' variant='filled'onClick={()=>{setSend(!send)}}>potvrdit</Button>
-        </Group>
-         </Paper>
+
+
+            <TextInput
+              style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.09)',
+            backdropFilter: 'blur(50px)',
+            border: '1px',
+            padding: '4px 12px',
+            borderRadius: '4px',   
+
+               }}
+            placeholder='uzivatel'
+            value={jmeno}
+            variant='unstyled'
+            onChange={(event) => setJmeno(event.currentTarget.value)}/>
+
+            <PasswordInput
+            className="bg-['rgba(255, 255, 255, 0.09)'] backdrop-blur-2xl rounded-xs px-12 py-4 "
+             /* style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.09)',
+                backdropFilter: 'blur(50px)',
+                border: '1px',
+                padding: '4px 12px',
+                borderRadius: '4px',
+              }}*/
+
+              placeholder='heslo'
+              value={heslo}
+              variant='unstyled'
+              onChange={(event) => setHeslo(event.currentTarget.value)} />
+          </Stack>
+          <Group align='right'>
+            <div style={{ flexGrow: "1" }}>&nbsp;</div>
+            <Button mt="lg" color='violet' variant='filled' onClick={() => { setSend(!send) }}>přihlásit</Button>
+          </Group>
+        </Paper>
 
       </div>
-     
+
     </div>
   );
 }
