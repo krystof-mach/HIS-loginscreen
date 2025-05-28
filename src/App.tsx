@@ -1,8 +1,9 @@
 import { Button, Stack, TextInput, PasswordInput, Group, Paper } from '@mantine/core';
 import { useState } from 'react'
-import "./App.css"
 import prop from './prop.mp4'
-
+import './App.css'
+import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function App() {
 
@@ -17,58 +18,47 @@ export default function App() {
 
   return (
 
-    <div className='inpt'>
-      
-      <div className="overlay"></div>
-      <video src={prop} autoPlay loop muted />
-      <div className='content'>
-        <Paper shadow="xl" p="xl"
-        style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.3)',
-          backdropFilter: 'blur(3px)',
-        }}>
-          <Stack
-            w={500}
-            align="strech"
-            justify="center"
-            gap="lg"
-          >
+      <div className='flex justify-center items-center h-screen w-screen relative overflow-hidden'>
+        <div className="z-2 absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.4)]"></div>
+        <video src={prop} autoPlay loop muted className='w-full h-full absolute top-0 left-0 object-cover z-1' />
+        <div className='relative z-3 flex items-center justify-center px-4 sm:px-8 '>
+          <Paper shadow="xl" p="xl"
+                 style={{
+                   backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                   backdropFilter: 'blur(3px)',
+                 }}
+                 className='sm:w-full max-w-md sm:max-w-full w-screen'>
+            <h1 className='font-[Zen_Dots] z-30 text-5xl sm:text-9xl justify-center flex text-center'>HIS 3</h1>
 
+            <Stack
+                className='w-full'
+                align="strech"
+                justify="center"
+                gap="lg"
+            >
+              <TextInput
+                  className="backdrop-blur-sm border rounded-sm"
 
+                  placeholder='Uživatel'
+                  value={jmeno}
+                  size = 'lg'
+                  onChange={(event) => setJmeno(event.currentTarget.value)}/>
 
-            <TextInput
-              style={{
-            backgroundColor: 'rgba(255, 255, 255, 0.09)',
-            backdropFilter: 'blur(50px)',
-            border: '1px',
-            padding: '4px 12px',
-            borderRadius: '4px',   
+              <PasswordInput
+                  className="backdrop-blur-sm border rounded-sm"
+                  placeholder='Heslo'
+                  value={heslo}
+                  size = 'lg'
+                  onChange={(event) => setHeslo(event.currentTarget.value)} />
+            </Stack>
+            <Group align='right'>
+              <div style={{ flexGrow: "1" }}>&nbsp;</div>
+              <Button mt="sm" size={'md'}  variant='filled' onClick={() => { setSend(!send) }}><FontAwesomeIcon icon={faDoorOpen} />  &nbsp; Přihlásit</Button>
 
-               }}
-            placeholder='uzivatel'
-            value={jmeno}
-            variant='unstyled'
-            onChange={(event) => setJmeno(event.currentTarget.value)}/>
+            </Group>
+          </Paper>
 
-            <PasswordInput
-            className="bg-['rgba(255, 255, 255, 0.09)'] backdrop-blur-2xl border rounded-sm"
-             style={{
-                padding: '4px 12px',
-              }}
-
-              placeholder='heslo'
-              value={heslo}
-              variant='unstyled'
-              onChange={(event) => setHeslo(event.currentTarget.value)} />
-          </Stack>
-          <Group align='right'>
-            <div style={{ flexGrow: "1" }}>&nbsp;</div>
-            <Button mt="lg" color='violet' variant='filled' onClick={() => { setSend(!send) }}>přihlásit</Button>
-          </Group>
-        </Paper>
-
+        </div>
       </div>
-
-    </div>
   );
 }
