@@ -1,5 +1,6 @@
-import { Button, Stack, TextInput, PasswordInput, Group, Paper } from '@mantine/core';
-import { useState } from 'react'
+import { Button, Stack, TextInput, PasswordInput, Group, Paper, Notification } from '@mantine/core';
+
+import { useState, useRef, useEffect} from 'react'
 import prop from './prop.mp4'
 import './App.css'
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
@@ -10,17 +11,51 @@ export default function App() {
   const [heslo, setHeslo] = useState('');
   const [jmeno, setJmeno] = useState('');
   const [send, setSend] = useState(false);
+  const [wpswrd, setWpswrd] = useState(false);
+  const [wname, setWname] = useState(false);
 
-  if (send) {
-    console.log("jmeno: ", jmeno, "heslo:", heslo);
-    setSend(!send);
-  }
+
+    if (send) {
+        console.log("jmeno: ", jmeno, "heslo:", heslo);
+        setSend(!send);
+
+        if(heslo !== '123') {
+            setWpswrd(true);
+        }
+        else {
+            setWpswrd(false);
+        }
+        if(jmeno !== '123') {
+            setWname(true);
+        }
+        else {
+            setWname(false);
+        }
+
+    }
+
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        const vid = document.querySelector("video");
+        vid.play();
+        let rychlost = 1;
+        let x = 3000;
+        const interval = setInterval(() => {
+            x/=2;
+            rychlost /=1.5;
+            vid.playbackRate = rychlost;
+            if (rychlost <= 0.3) clearInterval(interval);
+        }, x);
+    }, []);
+
+
 
   return (
 
-      <div className='flex justify-center items-center h-screen w-screen relative overflow-hidden'>
-        <div className="z-2 absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.4)]"></div>
-        <video src={prop} autoPlay loop muted className='w-full h-full absolute top-0 left-0 object-cover z-1' />
+      <div className='flex justify-center items-start sm:items-center h-screen w-screen relative overflow-hidden'>
+            <div className="z-2 absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.4)]"></div>
+            <video ref={videoRef} src={prop} autoPlay muted className='w-full h-full absolute top-0 left-0 object-cover z-1' />
         <div className='relative z-3 flex items-center justify-center px-4 sm:px-8 '>
           <Paper shadow="xl" p="xl"
                  style={{
@@ -36,6 +71,11 @@ export default function App() {
                 justify="center"
                 gap="lg"
             >
+
+                <Notification hidden={!wname && !wpswrd} color="red" title="Chyba" withCloseButton={!true}>
+                    Neznámý uživatel, nebo heslo
+                </Notification>
+
               <TextInput
                   className="backdrop-blur-sm border rounded-sm"
 
@@ -51,9 +91,10 @@ export default function App() {
                   size = 'lg'
                   onChange={(event) => setHeslo(event.currentTarget.value)} />
             </Stack>
+
             <Group align='right'>
               <div style={{ flexGrow: "1" }}>&nbsp;</div>
-              <Button mt="sm" size={'md'}  variant='filled' onClick={() => { setSend(!send) }}><FontAwesomeIcon icon={faDoorOpen} />  &nbsp; Přihlásit</Button>
+              <Button mt="sm" size={'md'} variant='filled' onClick={() => { setSend(!send) }}><FontAwesomeIcon icon={faDoorOpen} />  &nbsp; Přihlásit</Button>
 
             </Group>
           </Paper>
