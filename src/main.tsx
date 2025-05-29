@@ -8,6 +8,7 @@ import 'tailwindcss'
 import { createTheme, TextInput, PasswordInput } from '@mantine/core';
 
 
+
 const theme = createTheme({
     components: {
         TextInput: TextInput.extend({
@@ -42,6 +43,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <MantineProvider theme={theme}>
       <App />
+
     </MantineProvider>
   </React.StrictMode>
 );

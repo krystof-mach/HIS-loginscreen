@@ -1,18 +1,17 @@
-import { Button, Stack, TextInput, PasswordInput, Group, Paper, Notification } from '@mantine/core';
-
+import { Button, Stack, TextInput, PasswordInput, Group, Paper } from '@mantine/core';
 import { useState, useRef, useEffect} from 'react'
 import prop from './prop.mp4'
 import './App.css'
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {Notification } from '@mantine/core';
 
 export default function App() {
 
   const [heslo, setHeslo] = useState('');
   const [jmeno, setJmeno] = useState('');
   const [send, setSend] = useState(false);
-  const [wpswrd, setWpswrd] = useState(false);
-  const [wname, setWname] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
 
     if (send) {
@@ -32,6 +31,8 @@ export default function App() {
             setWname(false);
         }
 
+        Error(wname, wpswrd);
+
     }
 
     const videoRef = useRef(null);
@@ -48,6 +49,7 @@ export default function App() {
             if (rychlost <= 0.3) clearInterval(interval);
         }, x);
     }, []);
+
 
 
 
@@ -72,10 +74,9 @@ export default function App() {
                 gap="lg"
             >
 
-                <Notification hidden={!wname && !wpswrd} color="red" title="Chyba" withCloseButton={!true}>
-                    Neznámý uživatel, nebo heslo
+                <Notification hidden={errorMessage.length === 0} color="red" title="Chyba" withCloseButton={!true}>
+                    {errorMessage}
                 </Notification>
-
               <TextInput
                   className="backdrop-blur-sm border rounded-sm"
 
